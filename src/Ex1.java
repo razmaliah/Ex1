@@ -60,7 +60,20 @@ public class Ex1 {
 		int lx = xx.length;
 		int ly = yy.length;
 		if(xx!=null && yy!=null && lx==ly && lx>1 && lx<4) {
-		/** add you code below
+            if (lx == 2){
+                double y1y2 = yy[0]-yy[1];  // represent y1-y2
+                double x1x2 = xx[0]-xx[1];  // represent x1-x2
+                double a = y1y2 / x1x2;     // represent the a value from : ax+b linear
+                double b = yy[0] - (a*xx[0]);   // represent the b value
+                ans = new double [2];
+                ans[0] = b;
+                ans[1] = a;
+                return ans;
+            }
+            else{
+                return ans
+            }
+        /** add you code below
 
 		/////////////////// */
 		}

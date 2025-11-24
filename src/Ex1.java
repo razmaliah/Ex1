@@ -51,8 +51,8 @@ public class Ex1 {
 	 * This function computes a polynomial representation from a set of 2D points on the polynom.
 	 * The solution is based on: //	http://stackoverflow.com/questions/717762/how-to-calculate-the-vertex-of-a-parabola-given-three-points
 	 * Note: this function only works for a set of points containing up to 3 points, else returns null.
-	 * @param xx
-	 * @param yy
+	 * @param xx - given double[] represent the x values for the points.
+	 * @param yy- given double[]  represent the y values for the points.
 	 * @return an array of doubles representing the coefficients of the polynom.
 	 */
 	public static double[] PolynomFromPoints(double[] xx, double[] yy) {
@@ -89,13 +89,22 @@ public class Ex1 {
 	}
 	/** Two polynomials functions are equal if and only if they have the same values f(x) for n+1 values of x,
 	 * where n is the max degree (over p1, p2) - up to an epsilon (aka EPS) value.
+     * Note: 1. if p1 or p2 equals to Null will return false.
 	 * @param p1 first polynomial function
 	 * @param p2 second polynomial function
 	 * @return true iff p1 represents the same polynomial function as p2.
 	 */
 	public static boolean equals(double[] p1, double[] p2) {
 		boolean ans = true;
-
+        if (p1 == null||p2 == null){
+            return false;
+        }
+        int n = Math.max(p1.length, p2.length);
+        for(int i=0; i<=n; i++){
+            if(Math.abs(f(p1,i) - f(p2,i))>EPS){
+                ans = false;
+            }
+        }
 		return ans;
 	}
 

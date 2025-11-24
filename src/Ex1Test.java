@@ -201,4 +201,21 @@ class Ex1Test {
 		double area = 58.5658;
 		assertEquals(a1,area, Ex1.EPS);
 	}
+    @Test
+    public void testPolynomFromPoints(){
+        double[] p1x = {1,3};
+        double[] p1y = {5,9};
+        double[] p1 = Ex1.PolynomFromPoints(p1x,p1y);
+        assertEquals(3.0,p1[0]);
+        assertEquals(2.0,p1[1]);
+        double[] p2x = {1,2,-1};
+        double[] p2y = {1,15,-9};
+        double[] p2 = Ex1.PolynomFromPoints(p2x, p2y);
+        assertEquals(-7, p2[0]);
+        assertEquals(5, p2[1]);
+        assertEquals(3, p2[2]);
+        double[] pNull = null;
+        assertNull(Ex1.PolynomFromPoints(null,null));
+        assertNull(Ex1.PolynomFromPoints(p1x,p2y));
+    }
 }

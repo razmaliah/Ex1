@@ -57,9 +57,12 @@ public class Ex1 {
 	 */
 	public static double[] PolynomFromPoints(double[] xx, double[] yy) {
 		double [] ans = null;
+        if(xx==null || yy == null){
+            return null;
+        }
 		int lx = xx.length;
 		int ly = yy.length;
-		if(xx!=null && yy!=null && lx==ly && lx>1 && lx<4) {
+		if(lx==ly && lx>1 && lx<4) {
             if (lx == 2){
                 double y1y2 = yy[0]-yy[1];  // represent y1-y2
                 double x1x2 = xx[0]-xx[1];  // represent x1-x2
@@ -71,11 +74,16 @@ public class Ex1 {
                 return ans;
             }
             else{
-                return ans
+                double denom = (xx[0]-xx[1])*(xx[0]-xx[2])*(xx[1]-xx[2]); // denominator
+                double a = (xx[2] * (yy[1] - yy[0]) + xx[1] * (yy[0] - yy[2]) + xx[0] * (yy[2] - yy[1])) / denom;
+                double b = (xx[2]*xx[2] * (yy[0] - yy[1]) + xx[1]*xx[1] * (yy[2] - yy[0]) + xx[0]*xx[0] * (yy[1] - yy[2])) / denom;
+                double c = (xx[1] * xx[2] * (xx[1] - xx[2]) * yy[0] + xx[2] * xx[0] * (xx[2] - xx[0]) * yy[1] + xx[0] * xx[1] * (xx[0] - xx[1]) * yy[2]) / denom;
+                ans = new double [3];
+                ans [0] = c;
+                ans [1] = b;
+                ans [2] = a;
+                return ans;
             }
-        /** add you code below
-
-		/////////////////// */
 		}
 		return ans;
 	}
@@ -87,9 +95,7 @@ public class Ex1 {
 	 */
 	public static boolean equals(double[] p1, double[] p2) {
 		boolean ans = true;
-        /** add you code below
 
-         /////////////////// */
 		return ans;
 	}
 

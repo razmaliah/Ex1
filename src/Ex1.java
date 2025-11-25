@@ -118,9 +118,29 @@ public class Ex1 {
 		String ans = "";
 		if(poly.length==0) {ans="0";}
 		else {
-            /** add you code below
-
-             /////////////////// */
+            for (int i= poly.length-1;i>1;i--){
+                if (poly[i]>0){
+                    ans = ans + "+" + poly[i] + "x^" + i + " ";
+                }
+                if (poly[i]<0){
+                    ans = ans + poly[i] + "x^" + i + " ";
+                }
+            }
+            if (poly[1]>0){
+                ans = ans + "+" + poly[1] + "x ";
+            }
+            if (poly[1]<0){
+                ans = ans + poly[1] + "x ";
+            }
+            if(poly[0]>0){
+                ans = ans + "+" + poly[0];
+            }
+            if(poly[0]<0){
+                ans = ans + poly[0];
+            }
+            if(ans.charAt(0)=='+'){
+                ans = ans.substring(1);
+            }
 		}
 		return ans;
 	}

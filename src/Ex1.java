@@ -156,10 +156,23 @@ public class Ex1 {
 	 */
 	public static double sameValue(double[] p1, double[] p2, double x1, double x2, double eps) {
 		double ans = x1;
-        /** add you code below
-
-         /////////////////// */
-		return ans;
+        double range = Math.abs(x1-x2)/2;
+        int counter = 2;
+        boolean flag = false;
+        while (!flag){
+            for (int i = 1; i<counter ; i++){
+                double thisX = x1 + ((range/counter)*i);
+                double check = Math.abs(Ex1.f(p1,thisX) - Ex1.f(p2,thisX));
+                if (check<eps){
+                    ans = check;
+                    flag = true;
+                    break;
+                }
+            }
+            counter++;
+        }
+        // Math.abs(Ex1.f(p1,ans)-Ex1.f(p2,ans))<eps
+		return ans; // need to be the touching point between p1 p2
 	}
 	/**
 	 * Given a polynomial function (p), a range [x1,x2] and an integer with the number (n) of sample points.
@@ -175,10 +188,18 @@ public class Ex1 {
 	 */
 	public static double length(double[] p, double x1, double x2, int numberOfSegments) {
 		double ans = x1;
-        /** add you code below
-
-         /////////////////// */
-		return ans;
+        double sum = 0;
+        double range = Math.abs(x2-x1);
+        double tempX1 = x1;
+        double tempX2 = 0;
+        for(int i=1; i<=numberOfSegments; i++){
+            tempX2 = x1 + ((i*range)/numberOfSegments);
+            double a = Math.abs(Ex1.f(p,tempX1) - Ex1.f(p,tempX2));
+            double b = Math.abs(tempX1 - tempX2);
+            sum = sum + Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
+            tempX1 = tempX2;
+        }
+		return sum;
 	}
 	
 	/**

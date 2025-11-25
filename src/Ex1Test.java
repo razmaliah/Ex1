@@ -208,6 +208,13 @@ class Ex1Test {
         double[] p1 = Ex1.PolynomFromPoints(p1x,p1y);
         assertEquals(3.0,p1[0]);
         assertEquals(2.0,p1[1]);
+
+        double[] l1x = {1,2};
+        double[] l1y = {-1,-2};
+        double[] l1 = Ex1.PolynomFromPoints(l1x,l1y);
+        assertEquals(0.0,l1[0]);
+        assertEquals(-1.0,l1[1]);
+
         double[] p2x = {1,2,-1};
         double[] p2y = {1,15,-9};
         double[] p2 = Ex1.PolynomFromPoints(p2x, p2y);
@@ -219,7 +226,7 @@ class Ex1Test {
         assertNull(Ex1.PolynomFromPoints(p1x,p2y));
     }
     @Test
-    public void polyToString(){
+    public void testPolyToString(){
         double[] poly = {1.1,2.0,-3.3,0,-5.0};
         boolean isSame = true;
         String resExpected = "-5.0x^4 -3.3x^2 +2.0x +1.1";
@@ -229,5 +236,13 @@ class Ex1Test {
         }
         assertTrue(isSame);
     }
-
+    @Test
+    public void testLenght(){
+        double[] p = {0,0.75};
+        double[] p2 = {100,0,1};
+        double[] p3 = {123,0,0,1};
+        assertEquals(5.0,Ex1.length(p,0,4,3));
+        assertEquals(2*Math.sqrt(20), Ex1.length(p2,-2,2,2));
+        assertEquals(2*Math.sqrt(738), Ex1.length(p3,-3,3,2));
+    }
 }

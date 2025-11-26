@@ -245,4 +245,16 @@ class Ex1Test {
         assertEquals(2*Math.sqrt(20), Ex1.length(p2,-2,2,2));
         assertEquals(2*Math.sqrt(738), Ex1.length(p3,-3,3,2));
     }
+    @Test
+    public void testGetDeg(){
+        String x = " -98.8x ";
+        String d = " 98.8x^2424 ";
+        assertEquals(2424,Ex1.getDeg(d));
+        assertEquals(-98.8,Ex1.getNumBeforeX(x));
+        System.out.println(x);
+        System.out.println(Ex1.getNumBeforeX(x));
+        System.out.println(d);
+        System.out.println(Ex1.getDeg(d));
+
+    }
 }

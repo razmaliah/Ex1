@@ -171,8 +171,7 @@ public class Ex1 {
             }
             counter++;
         }
-        // Math.abs(Ex1.f(p1,ans)-Ex1.f(p2,ans))<eps
-		return ans; // need to be the touching point between p1 p2
+		return ans;
 	}
 	/**
 	 * Given a polynomial function (p), a range [x1,x2] and an integer with the number (n) of sample points.
@@ -229,12 +228,49 @@ public class Ex1 {
 	 * @return
 	 */
 	public static double[] getPolynomFromString(String p) {
-		double [] ans = ZERO;//  -1.0x^2 +3.0x +2.0
-        /** add you code below
-
-         /////////////////// */
-		return ans;
+		double [] ans = {0};//  -1.0x^2 +3.0x +2.0
+        if (!p.contains("x")){
+            ans[0] = Double.parseDouble(p);
+            return ans;
+        }
+        int size = 2;
+        int i1, i2;
+        if (p.contains("^")){
+            if(p.indexOf(" ")==0){p=p.substring(1);}
+            i1 = p.indexOf("^") + 1;
+            i2 = p.indexOf(" ");
+            size = getDeg(p)+1;
+        }
+        ans = new double[size];
+        while(p.contains("^")){
+            i1 = p.indexOf(" ");
+            String temp = p.substring(0,i1);
+            int deg = getDeg(temp);
+            double per = getNumBeforeX(temp);
+            ans[deg] = per;
+            p=p.substring(i1+1);
+            if(p.indexOf(" ")==0){p=p.substring(1);}
+        }
+        ans[1] = getNumBeforeX(p);
+        int j = p.indexOf(" ");
+        p = p.substring(j+1);
+        ans[0] = Double.parseDouble(p);
+        return ans;
 	}
+    public static double getNumBeforeX(String s){
+        int i = s.indexOf("x");
+        s= s.substring(0,i);
+        return Double.parseDouble(s);
+    }
+    public static int getDeg(String s){
+        int i = s.indexOf("^")+1;
+        s= s. substring(i);
+        i= s.indexOf(" ");
+        if (i > 0) {
+            s= s.substring(0, i);
+        }
+        return Integer.parseInt(s);
+    }
 	/**
 	 * This function computes the polynomial function which is the sum of two polynomial functions (p1,p2)
 	 * @param p1

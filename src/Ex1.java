@@ -273,16 +273,36 @@ public class Ex1 {
     }
 	/**
 	 * This function computes the polynomial function which is the sum of two polynomial functions (p1,p2)
-	 * @param p1
-	 * @param p2
-	 * @return
+     * Note: if p1 or p2 = null, then function will return ZERO.
+	 * @param p1 - first polynomial function
+	 * @param p2 - second polynomial function
+	 * @return -  new double array represent polynomial function for the sum of the two polynomial functions
 	 */
 	public static double[] add(double[] p1, double[] p2) {
-		double [] ans = ZERO;//
-        /** add you code below
+        double[] ans = ZERO;
+        if(p1==null || p2 == null){return ans;}
+        double[] large;
+        double[] small;
+        if(p1.length>p2.length){
+            large = p1;
+            small = p2;
+            ans = new double[p1.length];
+        }
+        else {
+            large = p2;
+            small = p1;
+            ans = new double[p2.length];
+        }
+        for (int i = 0; i<large.length;i++){
+            if(i< small.length){
+                ans[i]= large[i] + small[i];
+            }
+            else{
+                ans[i] = large[i];
+            }
+        }
 
-         /////////////////// */
-		return ans;
+        return ans;
 	}
 	/**
 	 * This function computes the polynomial function which is the multiplication of two polynoms (p1,p2)
@@ -292,9 +312,7 @@ public class Ex1 {
 	 */
 	public static double[] mul(double[] p1, double[] p2) {
 		double [] ans = ZERO;//
-        /** add you code below
 
-         /////////////////// */
 		return ans;
 	}
 	/**

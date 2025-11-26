@@ -325,14 +325,17 @@ public class Ex1 {
 	}
 	/**
 	 * This function computes the derivative of the p0 polynomial function.
-	 * @param po
+	 * @param p1
 	 * @return
 	 */
-	public static double[] derivative (double[] po) {
+	public static double[] derivative (double[] p1) {
 		double [] ans = ZERO;//
-        /** add you code below
-
-         /////////////////// */
+        if(p1 == null || p1.length == 1){return ans;}
+        int size = p1.length -1;
+        ans = new double[size];
+        for(int i = 0; i<size; i++){
+            ans[i] = p1[i+1] * (i+1);
+        }
 		return ans;
 	}
 }

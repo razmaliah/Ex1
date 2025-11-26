@@ -312,7 +312,15 @@ public class Ex1 {
 	 */
 	public static double[] mul(double[] p1, double[] p2) {
 		double [] ans = ZERO;//
-
+        if(p1 == null || p2 == null){return ans;}
+        int p1l = p1.length, p2l = p2.length;
+        int size = p1l + p2l;
+        ans = new double[size];
+        for(int i = 0;i<p1l;i++){
+            for(int j=0;j<p2l;j++){
+                ans[i+j] += p1[i] * p2[j];
+            }
+        }
 		return ans;
 	}
 	/**

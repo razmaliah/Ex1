@@ -156,20 +156,24 @@ public class Ex1 {
 	 */
 	public static double sameValue(double[] p1, double[] p2, double x1, double x2, double eps) {
 		double ans = x1;
-        double range = Math.abs(x1-x2)/2;
+        double range = Math.abs(x1-x2);
         int counter = 2;
         boolean flag = false;
         while (!flag){
             for (int i = 1; i<counter ; i++){
                 double thisX = x1 + ((range/counter)*i);
-                double check = Math.abs(Ex1.f(p1,thisX) - Ex1.f(p2,thisX));
+                double y1 = Ex1.f(p1,thisX), y2 = Ex1.f(p2,thisX);
+                double check = Math.abs(y1 - y2);
                 if (check<eps){
-                    ans = check;
+                    ans = thisX;
                     flag = true;
                     break;
                 }
             }
             counter++;
+            if(counter==1000){
+                return x1-1;
+            }
         }
 		return ans;
 	}
@@ -214,19 +218,44 @@ public class Ex1 {
 	 */
 	public static double area(double[] p1,double[]p2, double x1, double x2, int numberOfTrapezoid) {
 		double ans = 0;
-        /** add you code below
-
-         /////////////////// */
-		return ans;
+        if(p1 == null || p2 == null){return ans;}
+        double xSame = sameValue(p1,p2,x1,x2,EPS);
+        if(xSame == x1-1){
+            return areaBetween(p1,p2,x1,x2,numberOfTrapezoid);
+        }
+        double h1 = areaBetween(p1,p2,x1,xSame,numberOfTrapezoid);
+        double h2 = areaBetween(p1,p2,xSame,x2,numberOfTrapezoid);
+        ans = h1+h2;
+        return ans;
 	}
-	/**
-	 * This function computes the array representation of a polynomial function from a String
-	 * representation. Note:given a polynomial function represented as a double array,
-	 * getPolynomFromString(poly(p)) should return an array equals to p.
-	 * 
-	 * @param p - a String representing polynomial function.
-	 * @return
-	 */
+
+     public static double areaBetween(double[] p1,double[]p2, double x1, double x2, int numberOfTrapezoid) {
+         double ans = 0;
+         if(p1 == null || p2 == null){return ans;}
+         double h = Math.abs(x1 - x2)/ numberOfTrapezoid;
+         for(int i=0; i<numberOfTrapezoid;i++){
+             double y1 = f(p1,x1+h*i);
+             double y2 = f(p2,x1+h*i);
+             double y3 = f(p1, x1+h*(i+1));
+             double y4 = f(p2, x1+h*(i+1));
+             double y1y2 = Math.abs(y1-y2);
+             double y3y4 = Math.abs(y3-y4);
+             if(y1y2==0){y1y2=EPS*EPS;}
+             if(y3y4==0){y3y4=EPS*EPS;}
+             ans += ((y1y2 + y3y4) /2) * h;
+         }
+         return ans;
+     }
+
+
+         /**
+          * This function computes the array representation of a polynomial function from a String
+          * representation. Note:given a polynomial function represented as a double array,
+          * getPolynomFromString(poly(p)) should return an array equals to p.
+          *
+          * @param p - a String representing polynomial function.
+          * @return
+          */
 	public static double[] getPolynomFromString(String p) {
 		double [] ans = {0};//  -1.0x^2 +3.0x +2.0
         if (!p.contains("x")){

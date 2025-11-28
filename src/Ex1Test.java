@@ -242,12 +242,22 @@ class Ex1Test {
         assertNull(Ex1.PolynomFromPoints(p1x,p2y));
     }
     @Test
+    /**
+     * test poly function, test case when polynomial = 0;
+     */
     public void testPolyToString(){
         double[] poly = {1.1,2.0,-3.3,0,-5.0};
         boolean isSame = true;
         String resExpected = "-5.0x^4 -3.3x^2 +2.0x +1.1";
         System.out.println(Ex1.poly(poly));
         if(!resExpected.equals(Ex1.poly(poly))){
+            isSame = false;
+        }
+        assertTrue(isSame);
+
+        isSame = true;
+        resExpected = "0.0";
+        if(!resExpected.equals(Ex1.poly(Ex1.ZERO))){
             isSame = false;
         }
         assertTrue(isSame);

@@ -116,7 +116,8 @@ public class Ex1 {
 	 */
 	public static String poly(double[] poly) {
 		String ans = "";
-		if(poly.length==0) {ans="0";}
+		if(poly == null || poly.length==0) {ans="0";}
+        if(poly.length==1){return ""+ poly[0];}
 		else {
             for (int i= poly.length-1;i>1;i--){
                 if (poly[i]>0){

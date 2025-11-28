@@ -156,9 +156,19 @@ class Ex1Test {
 	 */
 	public void testSameValue2() {
 		double x1=-4, x2=0;
-		double rs1 = Ex1.sameValue2(po1,po2, x1, x2, Ex1.EPS);
-		double rs2 = Ex1.sameValue2(po2,po1, x1, x2, Ex1.EPS);
+        long start = System.currentTimeMillis();
+		double rs1 = Ex1.sameValue(po1,po2, x1, x2, Ex1.EPS);
+        long end = System.currentTimeMillis();
+        double runtime = end - start;
+        System.out.println("function sameValue run time is: " + runtime / 1000 + " seconds");
+        double rs2 = Ex1.sameValue(po2,po1, x1, x2, Ex1.EPS);
 		assertEquals(rs1,rs2, Ex1.EPS);
+        start = System.currentTimeMillis();
+        double rs3 = Ex1.sameValue2(po1,po2, x1, x2, Ex1.EPS);
+        end = System.currentTimeMillis();
+        System.out.println("function sameValue2 run time is: " + runtime / 1000 + " seconds");
+        double rs4 = Ex1.sameValue2(po2,po1, x1, x2, Ex1.EPS);
+        assertEquals(rs3,rs4, Ex1.EPS);
 	}
 	@Test
 	/**
@@ -263,13 +273,23 @@ class Ex1Test {
         assertTrue(isSame);
     }
     @Test
+    /**
+     * test length function, test cases too.
+     */
     public void testLenght(){
         double[] p = {0,0.75};
         double[] p2 = {100,0,1};
         double[] p3 = {123,0,0,1};
-        assertEquals(5.0,Ex1.length(p,0,4,3));
+        long start = System.currentTimeMillis();
+        double ans = Ex1.length(p,0,4,3);
+        long end = System.currentTimeMillis();
+        double runtime = end - start;
+        System.out.println("length function runtime: " + runtime/1000 + " seconds");
+        assertEquals(5.0,ans);
         assertEquals(2*Math.sqrt(20), Ex1.length(p2,-2,2,2));
         assertEquals(2*Math.sqrt(738), Ex1.length(p3,-3,3,2));
+        assertEquals(-1, Ex1.length(p3,-3,3,0));
+        assertEquals(5, Ex1.length(Ex1.ZERO,5,0,1));
     }
     @Test
     public void testGetDeg(){

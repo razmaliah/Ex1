@@ -214,9 +214,9 @@ public class Ex1 {
      }
 	/**
 	 * Given a polynomial function (p), a range [x1,x2] and an integer with the number (n) of sample points.
-	 * This function computes an approximation of the length of the function between f(x1) and f(x2) 
+	 * This function computes an approximation of the length of the function between f(x1) and f(x2) [x1,x2]
 	 * using n inner sample points and computing the segment-path between them.
-	 * assuming x1 < x2. 
+	 * if p = null or numberOfSegments < 1 , the function will return -1
 	 * This function should be implemented iteratively (none recursive).
 	 * @param p - the polynomial function
 	 * @param x1 - minimal value of the range
@@ -225,15 +225,15 @@ public class Ex1 {
 	 * @return the length approximation of the function between f(x1) and f(x2).
 	 */
 	public static double length(double[] p, double x1, double x2, int numberOfSegments) {
-		double ans = x1;
+        if (p == null || numberOfSegments<1){return -1;}
         double sum = 0;
-        double range = Math.abs(x2-x1);
+        double range = x2-x1;
         double tempX1 = x1;
         double tempX2 = 0;
         for(int i=1; i<=numberOfSegments; i++){
             tempX2 = x1 + ((i*range)/numberOfSegments);
-            double a = Math.abs(Ex1.f(p,tempX1) - Ex1.f(p,tempX2));
-            double b = Math.abs(tempX1 - tempX2);
+            double a = Ex1.f(p,tempX1) - Ex1.f(p,tempX2);
+            double b = tempX1 - tempX2;
             sum = sum + Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
             tempX1 = tempX2;
         }

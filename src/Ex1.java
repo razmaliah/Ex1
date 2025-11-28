@@ -92,7 +92,7 @@ public class Ex1 {
      * Note: 1. if p1 or p2 equals to Null will return false.
 	 * @param p1 first polynomial function
 	 * @param p2 second polynomial function
-	 * @return true iff p1 represents the same polynomial function as p2.
+	 * @return true if p1 represents the same polynomial function as p2.
 	 */
 	public static boolean equals(double[] p1, double[] p2) {
 		boolean ans = true;

@@ -120,13 +120,17 @@ class Ex1Test {
 	}
 	@Test
 	/** 
-	 * Tests the parsing of a polynom in a String like form.
+	 * Tests the parsing of a polynomial in a String like form. using equals and poly function too.
 	 */
 	public void testFromString() {
 		double[] p = {-1.1,2.3,3.1}; // 3.1X^2+ 2.3x -1.1
 		String sp2 = "3.1x^2 +2.3x -1.1";
 		String sp = Ex1.poly(p);
+        long start = System.currentTimeMillis();
 		double[] p1 = Ex1.getPolynomFromString(sp);
+        long end = System.currentTimeMillis();
+        double runtime = end - start;
+        System.out.println("getPolynomFromString function runtime : " + runtime/1000 + " seconds");
 		double[] p2 = Ex1.getPolynomFromString(sp2);
 		boolean isSame1 = Ex1.equals(p1, p);
 		boolean isSame2 = Ex1.equals(p2, p);
@@ -292,15 +296,27 @@ class Ex1Test {
         assertEquals(5, Ex1.length(Ex1.ZERO,5,0,1));
     }
     @Test
+    /**
+     * test getDeg function
+     */
     public void testGetDeg(){
         String x = " -98.8x ";
         String d = " 98.8x^2424 ";
         assertEquals(2424,Ex1.getDeg(d));
-        assertEquals(-98.8,Ex1.getNumBeforeX(x));
-        System.out.println(x);
-        System.out.println(Ex1.getNumBeforeX(x));
         System.out.println(d);
         System.out.println(Ex1.getDeg(d));
 
+    }
+    @Test
+    /**
+     * test GetNumBeforeX function
+     */
+    public void testGetNumBeforeX(){
+        String x = " -5.5x^7 ";
+        String d = " +8.0x^2424 ";
+        assertEquals(-5.5,Ex1.getNumBeforeX(x));
+        assertEquals(8.0,Ex1.getNumBeforeX(d));
+        System.out.println(d);
+        System.out.println(Ex1.getNumBeforeX(d));
     }
 }

@@ -283,14 +283,14 @@ public class Ex1 {
      }
 
 
-         /**
-          * This function computes the array representation of a polynomial function from a String
-          * representation. Note:given a polynomial function represented as a double array,
-          * getPolynomFromString(poly(p)) should return an array equals to p.
-          *
-          * @param p - a String representing polynomial function.
-          * @return
-          */
+     /**
+      * This function computes the array representation of a polynomial function from a String
+      * representation.
+      * Note:given a polynomial function (p) represented as a double array,
+      * getPolynomFromString(poly(p)) should return an array equals to p.
+      * @param p - a String representing polynomial function.
+      * @return an array of doubles representing the coefficients of the polynomial.
+      */
 	public static double[] getPolynomFromString(String p) {
 		double [] ans = {0};//  -1.0x^2 +3.0x +2.0
         if (!p.contains("x")){
@@ -321,11 +321,24 @@ public class Ex1 {
         ans[0] = Double.parseDouble(p);
         return ans;
 	}
+
+     /**
+      * this function is sub function for getPolynomFromString function. this function
+      * extract the coefficient a for x value from a string.(aX^n)
+      * @param s - substring represent part of polynomial. (aX^n)
+      * @return the coefficient for x value.
+      */
     public static double getNumBeforeX(String s){
         int i = s.indexOf("x");
         s= s.substring(0,i);
         return Double.parseDouble(s);
     }
+     /**
+      * this function is sub function for getPolynomFromString function. this function
+      * extract the degree n for x from a string. (aX^n)
+      * @param s - substring represent part of polynomial. (aX^n)
+      * @return the degree for x value.
+      */
     public static int getDeg(String s){
         int i = s.indexOf("^")+1;
         s= s. substring(i);

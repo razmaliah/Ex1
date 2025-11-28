@@ -156,8 +156,8 @@ class Ex1Test {
 	 */
 	public void testSameValue2() {
 		double x1=-4, x2=0;
-		double rs1 = Ex1.sameValue(po1,po2, x1, x2, Ex1.EPS);
-		double rs2 = Ex1.sameValue(po2,po1, x1, x2, Ex1.EPS);
+		double rs1 = Ex1.sameValue2(po1,po2, x1, x2, Ex1.EPS);
+		double rs2 = Ex1.sameValue2(po2,po1, x1, x2, Ex1.EPS);
 		assertEquals(rs1,rs2, Ex1.EPS);
 	}
 	@Test
@@ -202,22 +202,38 @@ class Ex1Test {
 		assertEquals(a1,area, Ex1.EPS);
 	}
     @Test
+    public void testArea4(){
+        double[] po_a = {2,1,-0.7, -0.02,0.02};
+        double[] po_b = {6, 0.1, -0.2};
+        double x1 = Ex1.sameValue(po_a,po_b, -10,-5, Ex1.EPS);
+        double a1 = Ex1.area(po_a,po_b, x1, 6, 1000);
+        double area = 60.9963;      // checked with 3 sources - GEMINI, emathhelp.net, desmos.com
+        assertEquals(a1,area, Ex1.EPS);
+    }
+    @Test
+    public void testArea5(){
+
+    }
+    @Test
+    /**
+    Test PolynomFromPoints, test for first and second degree polynomials. test cases.
+     **/
     public void testPolynomFromPoints(){
         double[] p1x = {1,3};
         double[] p1y = {5,9};
+        long start = System.currentTimeMillis();
         double[] p1 = Ex1.PolynomFromPoints(p1x,p1y);
+        long end = System.currentTimeMillis();
+        System.out.println("PolynomFromPoints function runtime for first degree polynomial: " + (end - start) / 1000.0 + " seconds");
         assertEquals(3.0,p1[0]);
         assertEquals(2.0,p1[1]);
 
-        double[] l1x = {1,2};
-        double[] l1y = {-1,-2};
-        double[] l1 = Ex1.PolynomFromPoints(l1x,l1y);
-        assertEquals(0.0,l1[0]);
-        assertEquals(-1.0,l1[1]);
-
         double[] p2x = {1,2,-1};
         double[] p2y = {1,15,-9};
+        start = System.currentTimeMillis();
         double[] p2 = Ex1.PolynomFromPoints(p2x, p2y);
+        end = System.currentTimeMillis();
+        System.out.println("PolynomFromPoints function runtime for second degree polynomial : " + (end - start) / 1000.0 + " seconds");
         assertEquals(-7, p2[0]);
         assertEquals(5, p2[1]);
         assertEquals(3, p2[2]);

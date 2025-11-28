@@ -52,7 +52,7 @@ public class Ex1 {
 	 * The solution is based on: //	http://stackoverflow.com/questions/717762/how-to-calculate-the-vertex-of-a-parabola-given-three-points
 	 * Note: this function only works for a set of points containing up to 3 points, else returns null.
 	 * @param xx - given double[] represent the x values for the points.
-	 * @param yy- given double[]  represent the y values for the points.
+	 * @param yy - given double[]  represent the y values for the points.
 	 * @return an array of doubles representing the coefficients of the polynom.
 	 */
 	public static double[] PolynomFromPoints(double[] xx, double[] yy) {
@@ -66,18 +66,18 @@ public class Ex1 {
             if (lx == 2){
                 double y1y2 = yy[0]-yy[1];  // represent y1-y2
                 double x1x2 = xx[0]-xx[1];  // represent x1-x2
-                double a = y1y2 / x1x2;     // represent the a value from : ax+b linear
-                double b = yy[0] - (a*xx[0]);   // represent the b value
+                double a = y1y2 / x1x2;     // represent a value from : ax+b polynomial
+                double b = yy[0] - (a*xx[0]);   // represent b value
                 ans = new double [2];
                 ans[0] = b;
                 ans[1] = a;
                 return ans;
             }
             else{
-                double denom = (xx[0]-xx[1])*(xx[0]-xx[2])*(xx[1]-xx[2]); // denominator
-                double a = (xx[2] * (yy[1] - yy[0]) + xx[1] * (yy[0] - yy[2]) + xx[0] * (yy[2] - yy[1])) / denom;
-                double b = (xx[2]*xx[2] * (yy[0] - yy[1]) + xx[1]*xx[1] * (yy[2] - yy[0]) + xx[0]*xx[0] * (yy[1] - yy[2])) / denom;
-                double c = (xx[1] * xx[2] * (xx[1] - xx[2]) * yy[0] + xx[2] * xx[0] * (xx[2] - xx[0]) * yy[1] + xx[0] * xx[1] * (xx[0] - xx[1]) * yy[2]) / denom;
+                double den = (xx[0]-xx[1])*(xx[0]-xx[2])*(xx[1]-xx[2]); // denominator
+                double a = (xx[2] * (yy[1] - yy[0]) + xx[1] * (yy[0] - yy[2]) + xx[0] * (yy[2] - yy[1])) / den;
+                double b = (xx[2]*xx[2] * (yy[0] - yy[1]) + xx[1]*xx[1] * (yy[2] - yy[0]) + xx[0]*xx[0] * (yy[1] - yy[2])) / den;
+                double c = (xx[1] * xx[2] * (xx[1] - xx[2]) * yy[0] + xx[2] * xx[0] * (xx[2] - xx[0]) * yy[1] + xx[0] * xx[1] * (xx[0] - xx[1]) * yy[2]) / den;
                 ans = new double [3];
                 ans [0] = c;
                 ans [1] = b;
@@ -177,6 +177,40 @@ public class Ex1 {
         }
 		return ans;
 	}
+     /**
+      * Given two polynomial functions (p1,p2), a range [x1,x2] and an epsilon eps. This function computes an x value (x1<=x<=x2)
+      * for which |p1(x) -p2(x)| < eps, assuming (p1(x1)-p2(x1)) * (p1(x2)-p2(x2)) <= 0.
+      * @param p1 - first polynomial function
+      * @param p2 - second polynomial function
+      * @param x1 - minimal value of the range
+      * @param x2 - maximal value of the range
+      * @param eps - epsilon (positive small value (often 10^-3, or 10^-6).
+      * @return an x value (x1<=x<=x2) for which |p1(x) - p2(x)| < eps.
+      */
+     public static double sameValue2(double[] p1, double[] p2, double x1, double x2, double eps) {
+         double ans = x1;
+         int size = Math.max(p1.length,p2.length);
+         double[] p3 = new double[size];
+         double[] large,small;
+         if(p1.length==size){
+             large = p1;
+             small = p2;
+         }
+         else{
+              large = p2;
+              small = p1;
+         }
+         for(int i=0;i<size;i++){
+             if(i<small.length){
+                 p3[i] = large[i] - small[i];
+             }
+             else{
+                 p3[i] = large[i];
+             }
+         }
+         ans = root_rec(p3,x1,x2,eps);
+         return ans;
+     }
 	/**
 	 * Given a polynomial function (p), a range [x1,x2] and an integer with the number (n) of sample points.
 	 * This function computes an approximation of the length of the function between f(x1) and f(x2) 

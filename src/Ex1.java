@@ -353,7 +353,7 @@ public class Ex1 {
      * Note: if p1 or p2 = null, then function will return ZERO.
 	 * @param p1 - first polynomial function
 	 * @param p2 - second polynomial function
-	 * @return -  new double array represent polynomial function for the sum of the two polynomial functions
+	 * @return -
 	 */
 	public static double[] add(double[] p1, double[] p2) {
         double[] ans = ZERO;
@@ -383,15 +383,16 @@ public class Ex1 {
 	}
 	/**
 	 * This function computes the polynomial function which is the multiplication of two polynoms (p1,p2)
-	 * @param p1
-	 * @param p2
-	 * @return
+     * if  p1 or p2 = null the function will return zero
+	 * @param p1 - first polynomial function
+	 * @param p2 - second polynomial function
+	 * @return new double array represent polynomial function for the multiplication of the two polynomial functions
 	 */
 	public static double[] mul(double[] p1, double[] p2) {
 		double [] ans = ZERO;//
         if(p1 == null || p2 == null){return ans;}
         int p1l = p1.length, p2l = p2.length;
-        int size = p1l + p2l;
+        int size = p1l + p2l -1;
         ans = new double[size];
         for(int i = 0;i<p1l;i++){
             for(int j=0;j<p2l;j++){
@@ -401,9 +402,9 @@ public class Ex1 {
 		return ans;
 	}
 	/**
-	 * This function computes the derivative of the p0 polynomial function.
-	 * @param p1
-	 * @return
+	 * This function computes the derivative of a polynomial function.
+	 * @param p1 - a polynomial function
+	 * @return new double array represent the derivative of p1
 	 */
 	public static double[] derivative (double[] p1) {
 		double [] ans = ZERO;//

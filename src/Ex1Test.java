@@ -76,7 +76,11 @@ class Ex1Test {
 	 * Tests that p1*0 == 0
 	 */
 	void testMul1() {
+        long start = System.currentTimeMillis();
 		double[] p1 = Ex1.mul(po1, Ex1.ZERO);
+        long end = System.currentTimeMillis();
+        double runtime = end - start;
+        System.out.println("nul function runtime: " + runtime/1000 + " second");
 		assertTrue(Ex1.equals(p1, Ex1.ZERO));
 	}
 	@Test
@@ -84,8 +88,12 @@ class Ex1Test {
 	 * Tests that p1*p2 == p2*p1
 	 */
 	void testMul2() {
-		double[] p12 = Ex1.mul(po1, po2);
-		double[] p21 = Ex1.mul(po2, po1);
+        long start = System.currentTimeMillis();
+        double[] p12 = Ex1.mul(po1, po2);
+        long end = System.currentTimeMillis();
+        double runtime = end - start;
+        System.out.println("nul function runtime: " + runtime/1000 + " second");
+        double[] p21 = Ex1.mul(po2, po1);
 		assertTrue(Ex1.equals(p12, p21));
 	}
 	@Test
@@ -110,8 +118,8 @@ class Ex1Test {
 	void testDerivativeArrayDoubleArray() {
 		double[] p = {1,2,3}; // 3X^2+2x+1
 		double[] pt = {2,6}; // 6x+2
-		double[] dp1 = Ex1.derivative(p); // 2x + 6
-		double[] dp2 = Ex1.derivative(dp1); // 2
+		double[] dp1 = Ex1.derivative(p); // 6x + 2
+		double[] dp2 = Ex1.derivative(dp1); // 6
 		double[] dp3 = Ex1.derivative(dp2); // 0
 		double[] dp4 = Ex1.derivative(dp3); // 0
 		assertTrue(Ex1.equals(dp1, pt));

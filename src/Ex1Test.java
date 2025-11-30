@@ -80,7 +80,7 @@ class Ex1Test {
 		double[] p1 = Ex1.mul(po1, Ex1.ZERO);
         long end = System.currentTimeMillis();
         double runtime = end - start;
-        System.out.println("nul function runtime: " + runtime/1000 + " second");
+        System.out.println("mul function runtime: " + runtime/1000 + " second");
 		assertTrue(Ex1.equals(p1, Ex1.ZERO));
 	}
 	@Test
@@ -92,7 +92,7 @@ class Ex1Test {
         double[] p12 = Ex1.mul(po1, po2);
         long end = System.currentTimeMillis();
         double runtime = end - start;
-        System.out.println("nul function runtime: " + runtime/1000 + " second");
+        System.out.println("mul function runtime: " + runtime/1000 + " second");
         double[] p21 = Ex1.mul(po2, po1);
 		assertTrue(Ex1.equals(p12, p21));
 	}
@@ -219,7 +219,6 @@ class Ex1Test {
         runtime = end - start;
         System.out.println("SameValue2 funtion runtime: " + runtime/1000 + " seconds");
         assertEquals(0.0, ans, Ex1.EPS);
-        System.out.println(ans);
 
 
     }

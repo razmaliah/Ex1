@@ -161,10 +161,21 @@ class Ex1Test {
 			assertFalse(Ex1.equals(d1[i], xx[i]));
 		}
 	}
+    @Test
+    /**
+     * Test sameValue for function and x-axis.
+     */
+    public void testSameValue(){
+        double[] po1 = {0,5,5};
+        double rss = Ex1.sameValue(po1 ,Ex1.ZERO, -0.5, 2, Ex1.EPS);
+        double rss2 = Ex1.sameValue2(po1 ,Ex1.ZERO, -0.5, 2, Ex1.EPS);
+        assertEquals(rss, 0.0, Ex1.EPS);
+        assertEquals(rss2, 0.0, Ex1.EPS);
 
+    }
 	@Test
 	/**
-	 * Tests is the sameValue function is symmetric.
+	 * Tests if the sameValue function is symmetric.
 	 */
 	public void testSameValue2() {
 		double x1=-4, x2=0;
@@ -182,6 +193,36 @@ class Ex1Test {
         double rs4 = Ex1.sameValue2(po2,po1, x1, x2, Ex1.EPS);
         assertEquals(rs3,rs4, Ex1.EPS);
 	}
+
+    /**
+     * test the runtime for sameValue function and sameValue2.
+     */
+    @Test
+    public void testSameValue3(){
+        double[] bigP = new double[4];
+        bigP[bigP.length-1] = 1;
+        bigP [1] = 1;
+
+        //  test sameValue
+        long start = System.currentTimeMillis();
+        double ans = Ex1.sameValue(bigP,Ex1.ZERO,-4,5,Ex1.EPS);
+        long end = System.currentTimeMillis();
+        double runtime = end - start;
+        System.out.println("SameValue funtion runtime: " + runtime/1000 + " seconds");
+        assertEquals(0.0, ans, Ex1.EPS);
+        System.out.println(Ex1.f(bigP, 0.5));
+
+        // test sameValue2
+        start = System.currentTimeMillis();
+        ans = Ex1.sameValue2(bigP,Ex1.ZERO,-4,5,Ex1.EPS);
+        end = System.currentTimeMillis();
+        runtime = end - start;
+        System.out.println("SameValue2 funtion runtime: " + runtime/1000 + " seconds");
+        assertEquals(0.0, ans, Ex1.EPS);
+        System.out.println(ans);
+
+
+    }
 	@Test
 	/**
 	 * Test the area function - it should be symmetric.
@@ -232,10 +273,7 @@ class Ex1Test {
         double area = 60.9963;      // checked with 3 sources - GEMINI, emathhelp.net, desmos.com
         assertEquals(a1,area, Ex1.EPS);
     }
-    @Test
-    public void testArea5(){
 
-    }
     @Test
     /**
     Test PolynomFromPoints, test for first and second degree polynomials. test cases.

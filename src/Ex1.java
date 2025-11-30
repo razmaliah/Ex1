@@ -209,7 +209,7 @@ public class Ex1 {
                  p3[i] = large[i];
              }
          }
-         ans = root_rec(p3,x1,x2,eps);
+         ans = root_rec(p3,x1,x2,EPS*EPS);
          return ans;
      }
 	/**
@@ -259,7 +259,7 @@ public class Ex1 {
             return areaBetween(p1,p2,x1,x2,numberOfTrapezoid);
         }
         double h1 = areaBetween(p1,p2,x1,xSame,numberOfTrapezoid);
-        double h2 = areaBetween(p1,p2,xSame,x2,numberOfTrapezoid);
+        double h2 = areaBetween(p1,p2,xSame,x2,numberOfTrapezoid );
         ans = h1+h2;
         return ans;
 	}
